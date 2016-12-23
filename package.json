@@ -16,8 +16,8 @@
     "lodash": "4.17.2",
     "switchback": "2.0.2",
     "prompt": "1.0.0",
-    "offshore-criteria": "0.0.2",
-    "offshore-schema": "0.0.3"
+    "offshore-criteria": "Atlantis-Software/offshore-criteria",
+    "offshore-schema": "Atlantis-Software/offshore-schema"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "0.4.0",
