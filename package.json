@@ -9,13 +9,13 @@
     }
   ],
   "dependencies": {
-    "offshore-validator": "~0.0.2",
     "async": "1.5.2",
     "bluebird": "3.4.6",
     "deep-diff": "0.3.4",
     "lodash": "4.17.2",
     "switchback": "2.0.2",
     "prompt": "1.0.0",
+    "offshore-validator": "Atlantis-Software/offshore-validator",
     "offshore-criteria": "Atlantis-Software/offshore-criteria",
     "offshore-schema": "Atlantis-Software/offshore-schema"
   },
