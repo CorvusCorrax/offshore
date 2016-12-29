@@ -116,16 +116,9 @@ describe('Collection Query', function() {
       });
 
       it('should not create generic dynamic finders for has_one and belongs_to associations', function() {
-        assert(!query.findOneByGroupIn);
-        assert(!query.findOneByGroupLike);
-        assert(!query.findByGroupIn);
-        assert(!query.findByGroupLike);
         assert(!query.countByGroup);
         assert(!query.countByGroupIn);
         assert(!query.countByGroupLike);
-        assert(!query.groupStartsWith);
-        assert(!query.groupEndsWith);
-        assert(!query.groupContains);
       });
 
       it.skip('should create limited dynamic finders for has_one and belongs_to associations', function() {
