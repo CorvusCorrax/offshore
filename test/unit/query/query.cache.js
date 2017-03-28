@@ -39,7 +39,7 @@ describe('Collection Query', function() {
           }
         };
 
-        offshore.initialize({adapters: {foobar: adapterDef}, connections: connections, cache: {prefix: 'test_cache_', defaultCacheTime: 100}}, function(err, colls) {
+        offshore.initialize({adapters: {foobar: adapterDef}, connections: connections, cache: {prefix: 'test_cache_', defaultCacheTime: 10000}}, function(err, colls) {
           if (err)
             return done(err);
           query = colls.collections.random;
@@ -49,38 +49,45 @@ describe('Collection Query', function() {
 
       it('should cache results using user defined cacheKey and cacheTime', function(done) {
         query.find({}).cache('cache_test', 10, function(err, first_values) {
-          assert(! err);
-          query.find({}).cache('cache_test', 10, function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find({}).cache('cache_test', 10, function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
 
       it('should cache results using user defined cacheTime and automatic cacheKey', function(done) {
         var criteria = {number: [1, 2]};
         query.find(criteria).cache(10, function(err, first_values) {
-          assert(! err);
-          query.find(criteria).cache(10, function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find(criteria).cache(10, function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
 
       it('should cache results with only a callback given', function(done) {
         var criteria = {number: 100};
         query.find(criteria).cache(function(err, first_values) {
-          assert(! err);
-          query.find(criteria).cache(function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find(criteria).cache(function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
+
     });
     describe('custom adapter cache', function() {
       var query;
@@ -116,7 +123,7 @@ describe('Collection Query', function() {
           }
         };
 
-        offshore.initialize({adapters: {foobar: adapterDef}, connections: connections, cache: {prefix: 'test_cache_', defaultCacheTime: 100, adapter: require('offshore-memory')}}, function(err, colls) {
+        offshore.initialize({adapters: {foobar: adapterDef}, connections: connections, cache: {prefix: 'test_cache_', defaultCacheTime: 10000, adapter: require('offshore-memory')}}, function(err, colls) {
           if (err)
             return done(err);
           query = colls.collections.random;
@@ -125,39 +132,46 @@ describe('Collection Query', function() {
       });
 
       it('should cache results using user defined cacheKey and cacheTime', function(done) {
-        query.find({}).cache('cache_test', 10, function(err, first_values) {
-          assert(! err);
-          query.find({}).cache('cache_test', 10, function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+        query.find({}).cache('cache_test', 600, function(err, first_values) {
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find({}).cache('cache_test', 600, function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
 
       it('should cache results using user defined cacheTime and automatic cacheKey', function(done) {
         var criteria = {number: [1, 2]};
-        query.find(criteria).cache(10, function(err, first_values) {
-          assert(! err);
-          query.find(criteria).cache(10, function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+        query.find(criteria).cache(600, function(err, first_values) {
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find(criteria).cache(600, function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
 
       it('should cache results with only a callback given', function(done) {
         var criteria = {number: 100};
         query.find(criteria).cache(function(err, first_values) {
-          assert(! err);
-          query.find(criteria).cache(function(err, cached_values) {
-            assert(! err);
-            assert(first_values[0].number === cached_values[0].number);
-            done();
-          });
+          assert.ifError(err);
+          setTimeout(function() {
+            query.find(criteria).cache(function(err, cached_values) {
+              assert.ifError(err);
+              assert.equal(first_values[0].number, cached_values[0].number);
+              done();
+            });
+          }, 500);
         });
       });
+
     });
   });
 });

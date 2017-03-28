@@ -49,7 +49,7 @@ describe('populate', function() {
 
     it('output should match the expected results', function() {
       results.should.have.lengthOf(expected.length);
-      _.all(results, function (row) {
+      _.every(results, function (row) {
         row.should.have.properties(expected.properties);
       });
       results.should.eql(expected.results);
@@ -98,7 +98,7 @@ describe('populate', function() {
 
     it('output should match the expected results', function() {
       results.should.have.lengthOf(expected.length);
-      _.all(results, function (row) {
+      _.every(results, function (row) {
         row.should.have.properties(expected.properties);
       });
       results.should.eql(expected.results);

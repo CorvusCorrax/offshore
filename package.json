@@ -1,7 +1,7 @@
 {
   "name": "offshore",
   "description": "An ORM for Node.js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "contributors": [
     {
       "name": "Alexandre Tiertant",
@@ -11,23 +11,23 @@
   "dependencies": {
     "offshore-validator": "~0.0.2",
     "async": "1.5.2",
-    "bluebird": "3.2.1",
-    "deep-diff": "0.3.3",
-    "lodash": "3.10.1",
-    "switchback": "2.0.0",
-    "prompt": "0.2.14",
+    "bluebird": "3.4.6",
+    "deep-diff": "0.3.4",
+    "lodash": "4.17.2",
+    "switchback": "2.0.2",
+    "prompt": "1.0.0",
     "offshore-criteria": "0.0.2",
     "offshore-schema": "0.0.3"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "0.3.1",
-    "eslint": "1.10.3",
-    "espree": "3.0.1",
-    "istanbul": "0.4.2",
-    "should": "8.2.1",
+    "codeclimate-test-reporter": "0.4.0",
+    "eslint": "3.11.1",
+    "espree": "3.3.2",
+    "istanbul": "0.4.5",
+    "should": "11.1.1",
     "offshore-memory": "Atlantis-Software/offshore-memory",
     "offshore-adapter-tests": "Atlantis-Software/offshore-adapter-tests",
-    "mocha": "2.4.5"
+    "mocha": "3.2.0"
   },
   "keywords": [
     "mvc",

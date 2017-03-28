@@ -115,22 +115,19 @@ describe('Collection Query', function() {
         assert(typeof query.nameContains === 'function');
       });
 
-      it('should not create generic dynamic finders for has_one and belongs_to associations', function() {
-        assert(!query.findOneByGroupIn);
-        assert(!query.findOneByGroupLike);
-        assert(!query.findByGroupIn);
-        assert(!query.findByGroupLike);
-        assert(!query.countByGroup);
-        assert(!query.countByGroupIn);
-        assert(!query.countByGroupLike);
-        assert(!query.groupStartsWith);
-        assert(!query.groupEndsWith);
-        assert(!query.groupContains);
-      });
-
-      it.skip('should create limited dynamic finders for has_one and belongs_to associations', function() {
+      it.skip('should create dynamic finders for has_one and belongs_to associations', function() {
         assert(typeof query.findByGroup === 'function');
         assert(typeof query.findOneByGroup === 'function');
+        assert(typeof query.findOneByGroupIn === 'function');
+        assert(typeof query.findOneByGroupLike === 'function');
+        assert(typeof query.findByGroupIn === 'function');
+        assert(typeof query.findByGroupLike === 'function');
+        assert(typeof query.countByGroup === 'function');
+        assert(typeof query.countByGroupIn === 'function');
+        assert(typeof query.countByGroupLike === 'function');
+        assert(typeof query.groupStartsWith === 'function');
+        assert(typeof query.groupEndsWith === 'function');
+        assert(typeof query.groupContains === 'function');
       });
 
     });
