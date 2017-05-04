@@ -1,7 +1,7 @@
 {
   "name": "offshore",
   "description": "An ORM for Node.js",
-  "version": "0.0.9",
+  "version": "1.0.1",
   "contributors": [
     {
       "name": "Alexandre Tiertant",
@@ -9,15 +9,15 @@
     }
   ],
   "dependencies": {
-    "offshore-validator": "~0.0.2",
     "async": "1.5.2",
-    "bluebird": "3.4.6",
+    "bluebird": "3.4.7",
     "deep-diff": "0.3.4",
-    "lodash": "4.17.2",
+    "lodash": "4.17.4",
     "switchback": "2.0.2",
     "prompt": "1.0.0",
-    "offshore-criteria": "0.0.2",
-    "offshore-schema": "0.0.3"
+    "offshore-validator": "~0.1.0",
+    "offshore-criteria": "~0.1.0",
+    "offshore-schema": "~0.1.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "0.4.0",
@@ -25,7 +25,7 @@
     "espree": "3.3.2",
     "istanbul": "0.4.5",
     "should": "11.1.1",
-    "offshore-memory": "Atlantis-Software/offshore-memory",
+    "offshore-memory": "~0.1.0",
     "offshore-adapter-tests": "Atlantis-Software/offshore-adapter-tests",
     "mocha": "3.2.0"
   },
