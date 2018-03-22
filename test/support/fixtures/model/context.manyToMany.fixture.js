@@ -24,6 +24,9 @@ module.exports = function() {
   var models = {
     foo: {
       identity: 'foo',
+      _model: function(foo) {
+        return foo;
+      },
       connection: 'my_foo',
       attributes: {
         id: {
@@ -49,6 +52,9 @@ module.exports = function() {
     },
     bar: {
       identity: 'bar',
+      _model: function(bar) {
+        return bar;
+      },
       connection: 'my_foo',
       attributes: {
         id: {

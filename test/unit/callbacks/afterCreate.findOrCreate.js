@@ -33,7 +33,7 @@ describe('.afterCreate()', function() {
 
           // Fixture Adapter Def
           var adapterDef = {
-            find: function(con, col, criteria, cb) { return cb(null, null); },
+            find: function(con, col, criteria, cb) { return cb(); },
             create: function(con, col, values, cb) { return cb(null, values); }
           };
 
@@ -52,7 +52,7 @@ describe('.afterCreate()', function() {
 
         it('should run afterCreate and mutate values on create', function(done) {
           person.findOrCreate({ name: 'test' }, { name: 'test' }, function(err, user) {
-            assert(!err);
+            assert.ifError(err);
             assert(user.name === 'test updated');
             done();
           });
@@ -149,7 +149,7 @@ describe('.afterCreate()', function() {
 
         // Fixture Adapter Def
         var adapterDef = {
-          find: function(con, col, criteria, cb) { return cb(null, null); },
+          find: function(con, col, criteria, cb) { return cb(); },
           create: function(con, col, values, cb) { return cb(null, values); }
         };
 

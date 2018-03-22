@@ -2,12 +2,12 @@ var Offshore = require('../../../lib/offshore');
 var assert = require('assert');
 var _ = require('lodash');
 
-describe('Alter Mode Recovery with schemaless data', function () {
+describe('Alter Mode Recovery with schemaless data', function() {
 
   var record;
 
   // Create an adapter and set some existing data
-  before(function (done) {
+  before(function(done) {
 
     // Hold data to be used in tests
     var persistentData = [{
@@ -18,22 +18,22 @@ describe('Alter Mode Recovery with schemaless data', function () {
     }];
 
     var adapter = {
-      registerConnection: function (connection, collections, cb) {
+      registerConnection: function(connection, collections, cb) {
         cb(null, null);
       },
-      define: function (connectionName, collectionName, definition, cb) {
-        this.describe(connectionName, collectionName, function (err, schema) {
+      define: function(connectionName, collectionName, definition, cb) {
+        this.describe(connectionName, collectionName, function(err, schema) {
           cb(null, schema);
         });
       },
-      describe: function (connectionName, collectionName, cb, connection) {
+      describe: function(connectionName, collectionName, cb) {
         var schema = {
           name: { type: 'string' },
           age: { type: 'number' }
         };
         cb(null, (persistentData.length === 1) ? schema : undefined);
       },
-      find: function (connectionName, collectionName, options, cb, connection) {
+      find: function(connectionName, collectionName, options, cb) {
 
         if(!options.select && !options.where) {
           return cb(null, persistentData);
@@ -59,11 +59,11 @@ describe('Alter Mode Recovery with schemaless data', function () {
 
         cb(null, results);
       },
-      create: function (connectionName, collectionName, data, cb, connection) {
+      create: function(connectionName, collectionName, data, cb) {
         persistentData.push(data);
         cb(null, data);
       },
-      drop: function (connectionName, collectionName, relations, cb, connection) {
+      drop: function(connectionName, collectionName, relations, cb) {
         persistentData = [];
         cb(null);
       }
@@ -99,9 +99,9 @@ describe('Alter Mode Recovery with schemaless data', function () {
     // Build the collections and find the record
     var PersonCollection = Offshore.Collection.extend(PersonModel);
     offshore.loadCollection(PersonCollection);
-    offshore.initialize({adapters: adapters, connections: connections}, function (err, data) {
+    offshore.initialize({adapters: adapters, connections: connections}, function(err, data) {
       if (err) return done(err);
-      data.collections.person.findOne({id: 1}, function (err, found) {
+      data.collections.person.findOne({id: 1}, function(err, found) {
         if (err) return done(err);
         record = found;
         done();
@@ -125,4 +125,3 @@ describe('Alter Mode Recovery with schemaless data', function () {
   });
 
 });
-

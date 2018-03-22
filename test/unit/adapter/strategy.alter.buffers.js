@@ -2,7 +2,7 @@ var Offshore = require('../../../lib/offshore');
 var assert = require('assert');
 var _ = require('lodash');
 
-describe('Alter Mode Recovery with buffer attributes', function () {
+describe('Alter Mode Recovery with buffer attributes', function() {
 
   var offshore;
   var adapters;
@@ -14,7 +14,7 @@ describe('Alter Mode Recovery with buffer attributes', function () {
   var ontology;
 
   // Create an adapter and set some existing data
-  before(function () {
+  before(function() {
     var buffer = new Buffer('test alter mode', 'utf8');
 
     // Hold data to be used in tests
@@ -37,15 +37,15 @@ describe('Alter Mode Recovery with buffer attributes', function () {
     });
 
     var adapter = {
-      registerConnection: function (connection, collections, cb) {
+      registerConnection: function(connection, collections, cb) {
         cb(null, null);
       },
-      define: function (connectionName, collectionName, definition, cb) {
-        this.describe(connectionName, collectionName, function (err, schema) {
+      define: function(connectionName, collectionName, definition, cb) {
+        this.describe(connectionName, collectionName, function(err, schema) {
           cb(null, schema);
         });
       },
-      describe: function (connectionName, collectionName, cb, connection) {
+      describe: function(connectionName, collectionName, cb) {
         var schema = {
           label: {type: 'VARCHAR2'},
           num: {type: 'NUMBER'},
@@ -60,17 +60,17 @@ describe('Alter Mode Recovery with buffer attributes', function () {
         };
         cb(null, (persistentData.length === 1) ? schema : undefined);
       },
-      find: function (connectionName, collectionName, options, cb, connection) {
+      find: function(connectionName, collectionName, options, cb) {
         if (!options.where) {
           return cb(null, persistentData);
         }
         cb(null, _.find(persistentData, options.where));
       },
-      create: function (connectionName, collectionName, data, cb, connection) {
+      create: function(connectionName, collectionName, data, cb) {
         persistentData.push(data);
         cb(null, data);
       },
-      drop: function (connectionName, collectionName, relations, cb, connection) {
+      drop: function(connectionName, collectionName, relations, cb) {
         persistentData = [];
         cb(null);
       }
@@ -111,18 +111,14 @@ describe('Alter Mode Recovery with buffer attributes', function () {
   });
 
 
-  it('should recover data', function (done) {
+  it('should recover data', function(done) {
     var PersonCollection = Offshore.Collection.extend(PersonModel);
     offshore.loadCollection(PersonCollection);
-    offshore.initialize({adapters: adapters, connections: connections}, function (err, data) {
-      if (err) {
-        return done(err);
-      }
+    offshore.initialize({adapters: adapters, connections: connections}, function(err, data) {
+      assert.ifError(err);
 
-      data.collections.person.findOne({id: 12}, function (err, found) {
-        if (err) {
-          return done(err);
-        }
+      data.collections.person.findOne({id: 12}, function(err, found) {
+        assert.ifError(err);
 
         assert(found, 'Alter mode should backup data, but records found === ' + found);
 
@@ -151,7 +147,7 @@ describe('Alter Mode Recovery with buffer attributes', function () {
           assert(inserted.ids[i] === record.ids[i],
               'Alter mode should recover array data, but (expected array[' + i + '] === '
               + inserted.ids[i] + ') !== (found array[' + i + '] === ' + record.ids[i] + ')');
-        };
+        }
 
         assert(inserted.avatar.toString('utf8') === record.avatar.toString('utf8'),
             'Alter mode should recover binary type, but (expected binary === "'
@@ -165,7 +161,7 @@ describe('Alter Mode Recovery with buffer attributes', function () {
             'Alter mode should recover date type, but ' + new Date(Date.parse(inserted.date))
             + ' !== ' + new Date(Date.parse(new Date(record.date))));
 
-        _.keys(inserted.obj).forEach(function (key) {
+        _.keys(inserted.obj).forEach(function(key) {
           assert(record.obj[key],
               'Alter mode should recover json type structure, but property found obj.' + key + ' does not exist');
 
@@ -179,4 +175,3 @@ describe('Alter Mode Recovery with buffer attributes', function () {
     });
   });
 });
-

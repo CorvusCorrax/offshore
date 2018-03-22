@@ -80,12 +80,10 @@ describe('instance methods', function() {
 
       it('should pass model values to create method for each relationship', function(done) {
         var person = new model({ id: 1, name: 'foobar' });
-
         person.bars.add(1);
         person.bars.add(2);
 
         person.save(function(err) {
-
           assert(results.length === 2);
           assert(results[0].foo_bars = 1);
           assert(results[0].bar_foos = 1);

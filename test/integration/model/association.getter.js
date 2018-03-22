@@ -31,6 +31,9 @@ describe('Model', function() {
           attributes: {
             user: {
               model: 'person'
+            },
+            foo: {
+              type: 'string'
             }
           }
         });

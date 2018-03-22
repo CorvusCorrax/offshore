@@ -66,9 +66,8 @@ describe('Collection Query', function() {
     it('should build a join query', function(done) {
       User.findOne(1)
       .populate('cars')
-      .exec(function(err, values) {
-        if(err) return done(err);
-
+      .exec(function(err) {
+        assert.ifError(err);
         assert(generatedCriteria.joins.length === 2);
 
         assert(generatedCriteria.joins[0].parent === 'user');

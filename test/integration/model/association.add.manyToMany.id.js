@@ -87,15 +87,13 @@ describe('Model', function() {
 
       it('should pass foreign key values to update method for each relationship', function(done) {
         collections.person.find().exec(function(err, models) {
-          if(err) return done(err);
+          assert.ifError(err);
 
           var person = models[0];
-
           person.preferences.add(1);
           person.preferences.add(2);
-
           person.save(function(err) {
-            if(err) return done(err);
+            assert.ifError(err);
 
             assert(prefValues.length === 2);
 

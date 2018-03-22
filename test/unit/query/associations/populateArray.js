@@ -63,9 +63,15 @@ describe('Collection Query', function() {
       var adapterDef = {
         identity: 'foo',
         find: function(con, col, criteria, cb) {
-          if(col === 'user') return cb(null, [{ id: 1, car: 1, name: 'John Doe' }]);
-          if(col === 'car') return cb(null, [{ id: 1, foobar: 1, tickets: [1, 2]}]);
-          if(col === 'ticket') return cb(null, [{ id: 1, reason: 'red light', car:1}, { id: 2, reason: 'Parking in a disabled space', car: 1 }]);
+          if (col === 'user') {
+            return cb(null, [{ id: 1, car: 1, name: 'John Doe' }]);
+          }
+          if (col === 'car') {
+            return cb(null, [{ id: 1, foobar: 1 }]);
+          }
+          if (col === 'ticket') {
+            return cb(null, [{ id: 1, reason: 'red light', car:1 }, { id: 2, reason: 'Parking in a disabled space', car: 1 }]);
+          }
           return cb();
         }
       };

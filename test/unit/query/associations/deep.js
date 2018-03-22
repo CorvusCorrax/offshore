@@ -1,26 +1,26 @@
-/************************************************************************** 
- *                                                                        * 
- *               1+-------------------+1                                  * 
- *       +--------+     Company       +--------+                          * 
- *      *|        +-------------------+        |*                         * 
- *  +----------+      +----------+       +---------+ +     +-----------+  * 
- *  |  Driver  +------+   Ride   +-------+   Taxi    +-----+ BreakDown |  * 
- *  +----------+1    *+----------+*     1+---------+ +1   *+-----------+  * 
- *      1|                                    *|                          * 
- *      1|                                    1|                          * 
- *  +----------+      +----------+       +-----------+     +-----------+  * 
- *  | Address  |      |Department+-------+Constructor+-----+  country  |  * 
- *  +----------+      +----------+*     1+-----------+*   *+-----------+  * 
- *                                                                        * 
+/**************************************************************************
+ *                                                                        *
+ *               1+-------------------+1                                  *
+ *       +--------+     Company       +--------+                          *
+ *      *|        +-------------------+        |*                         *
+ *  +----------+      +----------+       +---------+ +     +-----------+  *
+ *  |  Driver  +------+   Ride   +-------+   Taxi    +-----+ BreakDown |  *
+ *  +----------+1    *+----------+*     1+---------+ +1   *+-----------+  *
+ *      1|                                    *|                          *
+ *      1|                                    1|                          *
+ *  +----------+      +----------+       +-----------+     +-----------+  *
+ *  | Address  |      |Department+-------+Constructor+-----+  country  |  *
+ *  +----------+      +----------+*     1+-----------+*   *+-----------+  *
+ *                                                                        *
  *  1. A company may have many taxis and many drivers (OneToMany).        *
- *  2. A driver may have only one address (OneToOne).                     * 
+ *  2. A driver may have only one address (OneToOne).                     *
  *  3. A driver may drive many taxis and                                  *
- *     a taxi may be driven by many drivers (ManyToMany through Ride).    * 
+ *     a taxi may be driven by many drivers (ManyToMany through Ride).    *
  *  4. A taxi may pass through many breakdowns (OneToMany).               *
- *     and may have only one constructor (ManyToOne).                     * 
- *  5. A constructor may have many departments (OneToMany).               * 
- *  6. Many contructor may have many country (ManyToMany).                * 
- *                                                                        * 
+ *     and may have only one constructor (ManyToOne).                     *
+ *  5. A constructor may have many departments (OneToMany).               *
+ *  6. Many contructor may have many country (ManyToMany).                *
+ *                                                                        *
  **************************************************************************/
 
 
@@ -30,7 +30,7 @@ var async = require('async');
 var offshore = new Offshore();
 var migrate = 'drop';
 
-describe('Deep', function() {
+describe.skip('Deep', function() {
   var companyModel, taxiModel, driverModel, rideModel, constructorModel, addressModel, breakDownModel, departmentModel, countryModel;
   before(function(done) {
     var Company = Offshore.Collection.extend({
@@ -619,7 +619,7 @@ describe('Deep', function() {
           //Level 1
           assert(taxi.constructor, 'Could not populate first level with criteria.');
           assert(taxi.constructor.name === 'constructor 1', 'First level criteria not applied.');
-          //Level 2 
+          //Level 2
           assert(taxi.constructor.departments, 'Second level not populated.');
           assert(taxi.constructor.departments[0].name === 'dep 4', 'Second level criteria not applied.');
           done();
@@ -638,7 +638,7 @@ describe('Deep', function() {
           //Level 1
           assert(company.taxis, 'Could not populate first level');
           assert(company.taxis[0].matricule === 'taxi_4', 'First level criteria not applied.');
-          //Level 2 
+          //Level 2
           assert(company.taxis[0].breakdowns, 'Second level not populated.');
           assert(company.taxis[0].breakdowns[0].level === 10, 'Second level criteria not applied.');
           done();
@@ -694,7 +694,7 @@ describe('Deep', function() {
           //Level 1
           assert(taxi.constructor, 'Could not populate first level with criteria.');
           assert(taxi.constructor.name === 'constructor 1', 'First level criteria not applied.');
-          //Level 2 
+          //Level 2
           assert(taxi.constructor.departments, 'Second level not populated.');
           assert(taxi.constructor.departments[0].name === 'dep 4', 'Second level criteria not applied.');
           done();
@@ -702,4 +702,3 @@ describe('Deep', function() {
     });
   });
 });
-
